@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+	<property name="LOG_NAME" value="log" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) - %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+	</appender>
+		<appender name="FLUENCY_SYNC" class="ch.qos.logback.more.appenders.FluencyLogbackAppender">
+    <!-- Tag for Fluentd. Farther information: http://docs.fluentd.org/articles/config-file -->
+    <tag>SAMPLE.TAG</tag>
+
+    <!-- Host name/address and port number which Flentd placed -->
+    <remoteHost>localhost</remoteHost>
+    <port>24225</port>
+
+    <!-- [Optional] Multiple name/addresses and port numbers which Flentd placed -->
+   
+    <!-- [Optional] Additional fields(Pairs of key: value) -->
+
+    <!-- [Optional] Configurations to customize Fluency's behavior: https://github.com/komamitsu/fluency#usage  -->
+    <ackResponseMode>true</ackResponseMode>
+    <fileBackupDir>/tmp</fileBackupDir>
+    <bufferChunkInitialSize>2097152</bufferChunkInitialSize>
+    <bufferChunkRetentionSize>16777216</bufferChunkRetentionSize>
+    <maxBufferSize>268435456</maxBufferSize>
+    <connectionTimeoutMilli>5000</connectionTimeoutMilli>
+    <readTimeoutMilli>5000</readTimeoutMilli>
+    <waitUntilBufferFlushed>30</waitUntilBufferFlushed>
+    <waitUntilFlusherTerminated>40</waitUntilFlusherTerminated>
+    <flushAttemptIntervalMillis>200</flushAttemptIntervalMillis> 
+    <senderMaxRetryCount>12</senderMaxRetryCount>
+    <!-- [Optional] Enable/Disable use of EventTime to get sub second resolution of log event date-time -->
+    <useEventTime>true</useEventTime>
+    <sslEnabled>true</sslEnabled>
+    <!--  [Optional] If true, Map Marker is expanded instead of nesting in the marker name -->
+    <flattenMapMarker>false</flattenMapMarker>
+
+    <encoder>
+            <pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) - %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+  </appender>
+
+  <appender name="FLUENCY" class="ch.qos.logback.classic.AsyncAppender">
+    <!-- Max queue size of logs which is waiting to be sent (When it reach to the max size, the log will be disappeared). -->
+    <queueSize>999</queueSize>
+    <!-- Never block when the queue becomes full. -->
+    <neverBlock>true</neverBlock>
+    <!-- The default maximum queue flush time allowed during appender stop. 
+         If the worker takes longer than this time it will exit, discarding any remaining items in the queue.
+         10000 millis
+     -->
+    <maxFlushTime>10000</maxFlushTime>
+    <appender-ref ref="FLUENCY_SYNC" />
+  </appender>
+	<root level="INFO">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FLUENCY" />
+	</root>
+
+</configuration>
