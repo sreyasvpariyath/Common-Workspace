@@ -20,6 +20,6 @@ https://docs.fluentd.org/input/forward#how-to-enable-tls-encryption
 
 (Rename path\to\certificate.crt respectively)
 
-_ ..\..\bin\keytool -import -trustcacerts -keystore cacerts -storepass changeit -noprompt -alias td-agent -file path\to\certificate.crt _
+_..\\..\bin\keytool -import -trustcacerts -keystore cacerts -storepass changeit -noprompt -alias td-agent -file path\to\certificate.crt_
 
 
