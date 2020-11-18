@@ -2,7 +2,8 @@ package com.sreyas.bits.dc;
 
 import java.util.ArrayList;
 import java.util.List;
-import static com.sreyas.bits.dc.CMHUtils.*;
+
+import static com.sreyas.bits.dc.CMHUtils.procList;
 /*
 @author Sreyas V Pariyath
 Nov 17 2020 11:02 PM
@@ -70,33 +71,33 @@ public class Process {
         }
     }
 
-    void queryInit(int i, int j, int k) {
+    void queryInit(int initiator, int from, int to) {
         //a a b
         if (isEngaging) {
-            whoEngaged = j;
+            whoEngaged = from;
             num = getNum();
             wait = true;
             isEngaging = false;
             for (Process process : depProcessList) {
-                process.queryInit(i, nodeNo, process.getNodeNo());
+                process.queryInit(initiator, nodeNo, process.getNodeNo());
             }
         } else {
             if (wait) {
-                Process p = procList.get(j);
-                p.replyListner(i, nodeNo, k);
+                Process p = procList.get(from);
+                p.replyListner(initiator, nodeNo, to);
             }
         }
     }
     
-    void replyListner(int i, int j, int k) {
+    void replyListner(int initiator, int from, int to) {
         if (wait) {
             num--;
             if (num == 0) {
-                if (i == k) {
-                    System.out.println("DEADLOCK DETECTED");
+                if (initiator == to) {
+                    System.out.println("Initiator = P"+initiator+" & To is also = P"+to+" Hence ****DEADLOCK DETECTED****");
                 } else {
                     Process p = procList.get(whoEngaged);
-                    p.replyListner(i, nodeNo, j);
+                    p.replyListner(initiator, nodeNo, from);
                 }
             }
         }
