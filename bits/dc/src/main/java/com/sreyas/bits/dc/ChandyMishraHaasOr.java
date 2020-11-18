@@ -45,7 +45,6 @@ public class ChandyMishraHaasOr {
             printIt(graph);
             loadPrereq(number_of_proc, graph);
             Process pi = procList.get(query_initiator);
-            setPi(pi);
             List<Process> depList = pi.getDepProcessList();
             pi.setWait(true);
             pi.setNum(depList.size());
