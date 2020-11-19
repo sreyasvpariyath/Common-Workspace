@@ -1,9 +1,8 @@
-package com.sreyas.bits.dc;
+
 
 import java.util.List;
 import java.util.Scanner;
 
-import static com.sreyas.bits.dc.CMHUtils.*;
 
 /*
 @author Sreyas V Pariyath
@@ -13,8 +12,8 @@ public class ChandyMishraHaasOr {
 
 
     public static void loadPrereq(int numberOfProcess, int[][] graph) {
-        loadProcessList(numberOfProcess);
-        initDepProcessMap(graph);
+        CMHUtils.loadProcessList(numberOfProcess);
+        CMHUtils.initDepProcessMap(graph);
     }
 
     public static void main(String[] args) {
@@ -35,16 +34,16 @@ public class ChandyMishraHaasOr {
                     graph[i][j] = num;
                 }
             }
-            println("Enter the Query initiating Process");
+            println("Enter the Query initiating Process (Process no starts from 0)");
             final int query_initiator = sc.nextInt();
-            if (query_initiator > number_of_proc) {
+            if (query_initiator >= number_of_proc) {
                 println("Provide a valid input");
                 return;
             }
             println("Sending Query...");
             printIt(graph);
             loadPrereq(number_of_proc, graph);
-            Process pi = procList.get(query_initiator);
+            Process pi = CMHUtils.procList.get(query_initiator);
             List<Process> depList = pi.getDepProcessList();
             pi.setWait(true);
             pi.setNum(depList.size());

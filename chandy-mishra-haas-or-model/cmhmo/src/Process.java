@@ -1,9 +1,6 @@
-package com.sreyas.bits.dc;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.sreyas.bits.dc.CMHUtils.procList;
 /*
 @author Sreyas V Pariyath
 Nov 17 2020 11:02 PM
@@ -83,7 +80,7 @@ public class Process {
             }
         } else {
             if (wait) {
-                Process p = procList.get(from);
+                Process p = CMHUtils.procList.get(from);
                 p.replyListner(initiator, nodeNo, to);
             }
         }
@@ -96,7 +93,7 @@ public class Process {
                 if (initiator == to) {
                     System.out.println("Initiator = P"+initiator+" & To is also = P"+to+" Hence ****DEADLOCK DETECTED****");
                 } else {
-                    Process p = procList.get(whoEngaged);
+                    Process p = CMHUtils.procList.get(whoEngaged);
                     p.replyListner(initiator, nodeNo, from);
                 }
             }
