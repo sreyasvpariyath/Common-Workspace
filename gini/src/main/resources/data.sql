@@ -1,0 +1,7 @@
+CREATE TABLE if not exists documents (
+  id LONG AUTO_INCREMENT PRIMARY KEY,
+  userid VARCHAR(250) NOT NULL,
+  type VARCHAR(5) NOT NULL,
+  description VARCHAR(250) NOT NULL,
+  created TIMESTAMP WITH TIME ZONE
+);
