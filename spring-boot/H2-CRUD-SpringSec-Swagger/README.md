@@ -1,4 +1,4 @@
-# gini-skill-challange
+# Spring boot Project
 Navigate to the root of the project(folder containing pom.xml)<br/>
 To build, use command - mvn clean install<br/>
 To run, use command - java -jar target/gini-0.0.1-SNAPSHOT.jar<br/>
