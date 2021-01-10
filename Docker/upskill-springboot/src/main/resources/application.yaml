@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:docdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+      settings:
+        trace: false
+        web-allow-others: false
+application:
+  users:
+    - username: user
+      password: "{noop}user"
+      roles: USER
+    - username: admin
+      password: "{noop}admin"
+      roles: ADMIN
+  portalUrl: http://localhost:9595/admin
